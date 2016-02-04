@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha9'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    supportLibVersion = "23.0.1"
+}
+
+ext.deps = [
+        // Android
+        supportV4: "com.android.support:support-v4:$supportLibVersion",
+        supportAnnotations: "com.android.support:support-annotations:$supportLibVersion",
+        supportAppCompatV7: "com.android.support:appcompat-v7:$supportLibVersion",
+
+        // Test
+        espressoCore: ('com.android.support.test.espresso:espresso-core:2.2.1'),
+        espressoContrib: ('com.android.support.test.espresso:espresso-contrib:2.2.1'),
+        testRunner: ('com.android.support.test:runner:0.4.1'),
+
+        junit: 'junit:junit:4.12',
+]

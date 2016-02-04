@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.appsingularity.testing"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testCompile deps.junit
+    compile deps.supportAppCompatV7
+
+    androidTestCompile deps.espressoCore
+    androidTestCompile deps.espressoContrib
+    androidTestCompile deps.testRunner
+
+}
+
+// Setup tag processing for espresso tests
+android {
+    defaultConfig {
+        // Check for tag existence
+        def TAG_PARAM = "tags"
+        if (project.hasProperty(TAG_PARAM)) {
+            logger.info "Found tag(s) ${project.getProperties().get(TAG_PARAM)} "
+            // Split tags up
+            def separateTags = project.getProperties().get(TAG_PARAM).split(/,/)
+            separateTags.each {
+                // Check for ~ prefix
+                if (it.startsWith("~@")) {
+                    logger.info "Excluding tag ${it.substring(2)} "
+                    testInstrumentationRunnerArgument "notAnnotation", "${it.substring(2)}"
+                } else if (it.startsWith("@")) {
+                    logger.info "Including tag ${it.substring(1)} "
+                    testInstrumentationRunnerArgument "annotation", "${it.substring(1)}"
+                } else {
+                    logger.warn "What's this tag ${it}?"
+                }
+            }
+        }
+    }
+}

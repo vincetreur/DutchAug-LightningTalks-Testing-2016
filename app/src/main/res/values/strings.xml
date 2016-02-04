@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Testing</string>
+
+    <string name="label">Enter a number</string>
+    <string name="btn_calculate">Calculate</string>
+    <string name="result_even">Number is even</string>
+    <string name="result_odd">Number is odd</string>
+    <string name="error">Input is not a whole number</string>
+
+</resources>

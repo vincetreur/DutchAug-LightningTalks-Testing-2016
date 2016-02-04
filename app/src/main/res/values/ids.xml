@@ -1,0 +1,9 @@
+<resources>
+
+    <item name="label" type="id"/>
+    <item name="input" type="id"/>
+    <item name="btn_calculate" type="id"/>
+    <item name="result" type="id"/>
+    <item name="error" type="id"/>
+
+</resources>
